@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class TabsGroupParameterValue extends ParameterValue {
 
+    //TODO how to handle which tab was selected ?
 
     private final List<TabParametersValue> tabsValues;
 

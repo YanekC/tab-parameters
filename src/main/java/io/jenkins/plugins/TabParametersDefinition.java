@@ -5,16 +5,26 @@ import hudson.Extension;
 import hudson.model.Describable;
 import hudson.model.Descriptor;
 import hudson.model.ParameterDefinition;
+import hudson.util.FormValidation;
 import jenkins.model.Jenkins;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * Describe a tab and parameters contained inside
+ */
 public class TabParametersDefinition implements Describable<TabParametersDefinition>, Serializable {
 
+    /**
+     * Name of the tab
+     */
     private final String name;
+    /**
+     * All parameters inside the tab
+     */
     private final List<ParameterDefinition> parameters;
 
     @DataBoundConstructor
@@ -31,10 +41,6 @@ public class TabParametersDefinition implements Describable<TabParametersDefinit
         return name;
     }
 
-    public String getAllNames() {
-        return parameters.stream().map(ParameterDefinition::getName).collect(Collectors.joining());
-    }
-
     @Override
     @NonNull
     public DescriptorImpl getDescriptor() {
@@ -46,7 +52,13 @@ public class TabParametersDefinition implements Describable<TabParametersDefinit
         @NonNull
         @Override
         public String getDisplayName() {
-            return "Parameters Tab";
+            return "Tab parameters";
+        }
+
+        public FormValidation doCheckParameters(@QueryParameter String parameters) {
+            if (parameters.isEmpty())
+                return FormValidation.error(Messages.TabParametersDefinition_DescriptorImpl_ParametersEmpty());
+            else return FormValidation.ok();
         }
     }
 

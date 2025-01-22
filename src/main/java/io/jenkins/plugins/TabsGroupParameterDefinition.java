@@ -5,10 +5,12 @@ import hudson.Extension;
 import hudson.model.ParameterDefinition;
 import hudson.model.ParameterValue;
 import hudson.model.SimpleParameterDefinition;
+import hudson.util.FormValidation;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest2;
 
 import java.util.ArrayList;
@@ -16,6 +18,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Entrypoint of tab parameters
+ * Define a list of tabs {@link TabParametersDefinition} the contains other parameters
+ * Parameters can be any Jenkins {@link ParameterDefinition}
+ * <p>
+ * The method {@link TabsGroupParameterDefinition#createValue(String)} make the work of generating values of parameters inside the tabs
+ */
 public class TabsGroupParameterDefinition extends SimpleParameterDefinition {
 
     private final List<TabParametersDefinition> tabs;
@@ -45,6 +54,7 @@ public class TabsGroupParameterDefinition extends SimpleParameterDefinition {
                 var paramDefinition = getParamDefinitionFromTab(parameterName);
                 parametersValues.add(paramDefinition.createValue(req, jsonParameter));
             });
+            //TabsGroupParameterValue#getValue Cannot be null
             groupParameterValue.getValue().add(new TabParametersValue(tabName, parametersValues));
         });
 
@@ -67,7 +77,7 @@ public class TabsGroupParameterDefinition extends SimpleParameterDefinition {
                 }
             }
         }
-        return null;
+        throw new IllegalArgumentException("Cannot find parameter definition " + name + " in " + this.getName() + " tab definition");
     }
 
     @Override
@@ -100,7 +110,19 @@ public class TabsGroupParameterDefinition extends SimpleParameterDefinition {
         @NonNull
         @Override
         public String getDisplayName() {
-            return "Group Parameter";
+            return Messages.TabsGroupParameterDefinition_DisplayName();
+        }
+
+        public FormValidation doCheckName(@QueryParameter String name) {
+            if (name.isEmpty())
+                return FormValidation.error(Messages.TabsGroupParameterDefinition_ParameterDescriptorImpl_NameEmpty());
+            else return FormValidation.ok();
+        }
+
+        public FormValidation doCheckTabs(@QueryParameter String tabs) {
+            if (tabs.isEmpty())
+                return FormValidation.error(Messages.TabsGroupParameterDefinition_ParameterDescriptorImpl_TabsEmpty());
+            else return FormValidation.ok();
         }
     }
 }

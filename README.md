@@ -3,6 +3,13 @@
 ## Introduction
 
 TODO Describe what your plugin does here
+This plugin provides Tabs in the "Build with parameters" view
+
+Limitations:
+Did not test recursion of tabs
+Only tested with base Jenkins Parameters
+Cannot do POST requests
+All parameters are passed to the build, even the not visible ones
 
 ## Getting started
 
