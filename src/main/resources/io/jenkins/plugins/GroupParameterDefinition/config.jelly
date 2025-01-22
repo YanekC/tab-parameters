@@ -1,0 +1,14 @@
+<?jelly escape-by-default='true' ?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+    <f:entry title="${%Tabs}">
+        <f:textbox field="name"/>
+        <f:repeatable field="tabs">
+            <f:entry title="${%TabName}">
+                <f:textbox field="name"/>
+            </f:entry>
+            <f:nested>
+                <f:repeatableHeteroProperty field="parameters" hasHeader="true" addCaption="${%Add Parameter}"/>
+            </f:nested>
+        </f:repeatable>
+    </f:entry>
+</j:jelly>

@@ -1,0 +1,33 @@
+<?jelly escape-by-default='true' ?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler"
+         xmlns:f="/lib/form"
+>
+    <j:set var="escapeEntryTitleAndDescription" value="false"/>
+    <f:entry title="${h.escape(it.name)}" description="${it.formattedDescription}">
+        <div name="parameter">
+            <input type="hidden" name="name" value="${it.name}"/>
+
+            <!-- Tab links -->
+            <div class="tab">
+                <j:forEach var="tab" items="${it.tabs}">
+                    <input type="button" class="tablinks" onclick="openTab(event, '${tab.name}')">${tab.name}</input>
+                </j:forEach>
+            </div>
+
+            <j:forEach var="tab" items="${it.tabs}">
+                <!-- Tab content -->
+                <div name="tabsValues" id="${tab.name}" class="tabcontent">
+                    <input type="hidden" name="name" value="${tab.name}"/>
+                    <j:forEach var="parameterDefinition" items="${tab.parameters}">
+                        <j:set var="escapeEntryTitleAndDescription" value="true"/> <!-- SECURITY-353 defense unless overridden -->
+                        <tbody>
+                            <st:include it="${parameterDefinition}"
+                                        page="${parameterDefinition.descriptor.valuePage}"/>
+                        </tbody>
+                    </j:forEach>
+                </div>
+            </j:forEach>
+        </div>
+    </f:entry>
+    <st:adjunct includes="org.biouno.unochoice.GroupParameter.tabs"/>
+</j:jelly>
