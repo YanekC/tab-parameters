@@ -1,0 +1,4 @@
+<?jelly escape-by-default='true'?>
+<div>
+    This plugin provides Tabs in the "Build with parameters" view
+</div>
