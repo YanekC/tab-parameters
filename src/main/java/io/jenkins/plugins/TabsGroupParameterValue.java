@@ -6,13 +6,13 @@ import org.kohsuke.stapler.DataBoundConstructor;
 import java.util.List;
 import java.util.Objects;
 
-public class GroupParameterValue extends ParameterValue {
+public class TabsGroupParameterValue extends ParameterValue {
 
 
     private final List<TabParametersValue> tabsValues;
 
     @DataBoundConstructor
-    public GroupParameterValue(String name, List<TabParametersValue> tabsValues) {
+    public TabsGroupParameterValue(String name, List<TabParametersValue> tabsValues) {
         super(name);
         this.tabsValues = tabsValues;
     }
@@ -27,7 +27,7 @@ public class GroupParameterValue extends ParameterValue {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        GroupParameterValue that = (GroupParameterValue) o;
+        TabsGroupParameterValue that = (TabsGroupParameterValue) o;
         return Objects.equals(tabsValues, that.tabsValues);
     }
 

@@ -16,20 +16,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class GroupParameterDefinition extends SimpleParameterDefinition {
+public class TabsGroupParameterDefinition extends SimpleParameterDefinition {
 
     private final List<TabParametersDefinition> tabs;
 
     @DataBoundConstructor
-    public GroupParameterDefinition(String name, List<TabParametersDefinition> tabs) {
+    public TabsGroupParameterDefinition(String name, List<TabParametersDefinition> tabs) {
         super(name);
         this.tabs = tabs;
     }
 
     @Override
-    public GroupParameterValue createValue(StaplerRequest2 req, JSONObject jo) {
+    public TabsGroupParameterValue createValue(StaplerRequest2 req, JSONObject jo) {
         String name = jo.getString("name");
-        var groupParameterValue = new GroupParameterValue(name, new ArrayList<>());
+        var groupParameterValue = new TabsGroupParameterValue(name, new ArrayList<>());
 
         JSONArray tabsValues = jo.getJSONArray("tabsValues");
         var parametersValues = new ArrayList<ParameterValue>();
@@ -71,7 +71,8 @@ public class GroupParameterDefinition extends SimpleParameterDefinition {
     }
 
     @Override
-    public GroupParameterValue createValue(String value) {
+    public TabsGroupParameterValue createValue(String value) {
+        //TODO
         return null;
     }
 
@@ -84,7 +85,7 @@ public class GroupParameterDefinition extends SimpleParameterDefinition {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        GroupParameterDefinition that = (GroupParameterDefinition) o;
+        TabsGroupParameterDefinition that = (TabsGroupParameterDefinition) o;
         return Objects.equals(tabs, that.tabs);
     }
 
