@@ -29,5 +29,5 @@
             </j:forEach>
         </div>
     </f:entry>
-    <st:adjunct includes="org.biouno.unochoice.GroupParameter.tabs"/>
+    <st:adjunct includes="io.jenkins.plugins.TabsGroupParameterDefinition.tabs"/>
 </j:jelly>
