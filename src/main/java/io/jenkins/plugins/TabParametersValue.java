@@ -16,6 +16,14 @@ public class TabParametersValue implements Serializable {
         this.parameters = parameters;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public List<ParameterValue> getParameters() {
+        return parameters;
+    }
+
     @Override
     public String toString() {
         return "TabParametersValue{" +

@@ -20,6 +20,10 @@ public class TabsGroupParameterValue extends ParameterValue {
 
     @Override
     public List<TabParametersValue> getValue() {
+        return getTabsValues();
+    }
+
+    public List<TabParametersValue> getTabsValues() {
         return tabsValues;
     }
 

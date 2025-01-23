@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form" xmlns:st="jelly:stapler">
+    <j:set var="escapeEntryTitleAndDescription" value="false"/>
+    <f:entry title="${h.escape(it.name)}" description="${it.formattedDescription}">
+        <div name="parameter">
+            <!-- Tab links -->
+            <div class="tab">
+                <j:forEach var="tab" items="${it.tabsValues}">
+                    <input type="button" disabled="true" class="tablinks">${tab.name}</input>
+                </j:forEach>
+            </div>
+
+            <j:forEach var="tab" items="${it.tabsValues}">
+                <!-- Tab content -->
+                <div name="tabsValues" id="${tab.name}" class="tabcontent">
+                    <input type="hidden" name="name" value="${tab.name}"/>
+                    <j:set var="escapeEntryTitleAndDescription"
+                           value="true"/> <!-- SECURITY-353 defense unless overridden -->
+                    <j:forEach var="parameterValue" items="${tab.parameters}">
+                        <st:include it="${parameterValue}" page="value.jelly"/>
+                    </j:forEach>
+                </div>
+            </j:forEach>
+        </div>
+    </f:entry>
+
+</j:jelly>
