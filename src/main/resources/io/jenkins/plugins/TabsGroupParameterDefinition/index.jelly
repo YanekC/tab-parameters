@@ -6,11 +6,17 @@
     <f:entry title="${h.escape(it.name)}" description="${it.formattedDescription}">
         <div name="parameter">
             <input type="hidden" name="name" value="${it.name}"/>
+            <input type="hidden" id="selected-tab-input" name="selectedTab"/>
 
             <!-- Tab links -->
             <div class="tab">
-                <j:forEach var="tab" items="${it.tabs}">
-                    <input type="button" class="tablinks" onclick="openTab(event, '${tab.name}')">${tab.name}</input>
+                <j:forEach var="tab" items="${it.tabs}" indexVar="index">
+                    <j:set var="id" value="not-selected"/>
+                    <j:if test="${index==0}">
+                        <j:set var="id" value="selected"/>
+                    </j:if>
+                    <input type="button" id="${id}" class="tablinks" onclick="openTab(event, '${tab.name}')">${tab.name}
+                    </input>
                 </j:forEach>
             </div>
 

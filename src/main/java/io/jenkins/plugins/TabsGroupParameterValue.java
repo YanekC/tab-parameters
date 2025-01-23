@@ -8,14 +8,15 @@ import java.util.Objects;
 
 public class TabsGroupParameterValue extends ParameterValue {
 
-    //TODO how to handle which tab was selected ?
-
     private final List<TabParametersValue> tabsValues;
 
+    private final String selectedTab;
+
     @DataBoundConstructor
-    public TabsGroupParameterValue(String name, List<TabParametersValue> tabsValues) {
+    public TabsGroupParameterValue(String name, List<TabParametersValue> tabsValues, String selectedTab) {
         super(name);
         this.tabsValues = tabsValues;
+        this.selectedTab = selectedTab;
     }
 
     @Override
@@ -25,6 +26,17 @@ public class TabsGroupParameterValue extends ParameterValue {
 
     public List<TabParametersValue> getTabsValues() {
         return tabsValues;
+    }
+
+    public String getSelectedTab() {
+        return selectedTab;
+    }
+
+    public String getTabButtonId(TabParametersValue tab) {
+        if (tab.getName().equals(selectedTab)) {
+            return "selected";
+        }
+        return "not-selected";
     }
 
     @Override

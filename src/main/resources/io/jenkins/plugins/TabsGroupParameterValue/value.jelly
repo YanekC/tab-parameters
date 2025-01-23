@@ -7,7 +7,8 @@
             <!-- Tab links -->
             <div class="tab">
                 <j:forEach var="tab" items="${it.tabsValues}">
-                    <input type="button" disabled="true" class="tablinks">${tab.name}</input>
+                    <input type="button" disabled="true" id="${it.getTabButtonId(tab)}" class="tablinks">${tab.name}
+                    </input>
                 </j:forEach>
             </div>
 
