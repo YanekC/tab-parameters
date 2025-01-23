@@ -15,8 +15,8 @@
                     <j:if test="${index==0}">
                         <j:set var="id" value="selected"/>
                     </j:if>
-                    <input type="button" id="${id}" class="tablinks" onclick="openTab(event, '${tab.name}')">${tab.name}
-                    </input>
+                    <input type="button" id="${id}" value="${tab.name}" class="tablinks task"
+                           onclick="openTab(event, '${tab.name}')"/>
                 </j:forEach>
             </div>
 
