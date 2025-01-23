@@ -40,7 +40,7 @@ public class TabsGroupParameterDefinition extends SimpleParameterDefinition {
         String name = jo.getString("name");
         var groupParameterValue = new TabsGroupParameterValue(name, new ArrayList<>());
 
-        JSONArray tabsValues = jo.getJSONArray("tabsValues");
+        Iterable<Object> tabsValues = toIterable(jo.get("tabsValues"));
         var parametersValues = new ArrayList<ParameterValue>();
 
         tabsValues.forEach(tab -> {
