@@ -2,30 +2,57 @@
 
 ## Introduction
 
-TODO Describe what your plugin does here
-This plugin provides Tabs in the "Build with parameters" view
+This plugin provides Tabs in the "Build with parameters" view.
+The style try to match to Jenkins style.
+The implementation uses only base Jenkins classes and native and simple HTML/CSS/JS.
 
-Limitations:
-Did not test recursion of tabs
-Only tested with base Jenkins Parameters
-Cannot do POST requests
-All parameters are passed to the build, even the not visible ones
+Example of build configuration :
+![](docs/config.png)
+
+Example of "build with parameters" view:
+First tab:
+![](docs/run-tab1.png)
+
+Second tab:
+![](docs/run-tab2.png)
+
+Heavily inspired by uno choice plugin.
+
+## Plugin maintenance
+
+This plugin will maybe never receive any new updates and is provided as is.
+Right now I don't have the time to fully support this plugin on my own time.
+
+Feel free to fork this plugin and add your features on your fork. If you feel like you could handle the maintenance of
+this plugin, you can even try to make it an official plugin. Just credit this repo if you do this.
+Maybe this plugin is ready to be included in official plugins. At least I followed the "Publish your plugin guide".
 
 ## Getting started
 
-TODO Tell users how to configure your plugin here, include screenshots, pipeline examples and 
-configuration-as-code examples.
+Just add a "Tabs parameter" as you would add any
+other [build parameter](https://plugins.jenkins.io/build-with-parameters/)
+
+## Limitations:
+
+* Did not test recursion of tabs
+* Only tested with base Jenkins Parameters
+* Cannot do POST requests
+* All parameters are passed to the build, even the not visible ones
+* No unit tests (shame on me)
+
+## Technical Infos
+
+At first, I tough I needed to reimplement the way the parameters where rendered, which lead me to Jenkins core
+territory, something that I don't wanted to try.
+Now I think my implementation is not _that_ hacky.
 
 ## Issues
 
-TODO Decide where you're going to host your issues, the default is Jenkins JIRA, but you can also enable GitHub issues,
-If you use GitHub issues there's no need for this section; else add the following line:
-
-Report issues and enhancements in the [Jenkins issue tracker](https://issues.jenkins.io/).
+Lookup the GitHub Issues tab
 
 ## Contributing
 
-TODO review the default [CONTRIBUTING](https://github.com/jenkinsci/.github/blob/master/CONTRIBUTING.md) file and make sure it is appropriate for your plugin, if not then add your own one adapted from the base file
+See [CONTRIBUTING](https://github.com/jenkinsci/.github/blob/master/CONTRIBUTING.md)
 
 Refer to our [contribution guidelines](https://github.com/jenkinsci/.github/blob/master/CONTRIBUTING.md)
 
