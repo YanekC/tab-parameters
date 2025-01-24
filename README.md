@@ -35,6 +35,7 @@ other [build parameter](https://plugins.jenkins.io/build-with-parameters/)
 ## Limitations:
 
 * Did not test recursion of tabs
+* Not tested rebuild plugin
 * Only tested with base Jenkins Parameters
 * Cannot do POST requests
 * All parameters are passed to the build, even the not visible ones

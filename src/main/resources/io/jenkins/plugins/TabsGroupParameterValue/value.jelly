@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form" xmlns:st="jelly:stapler">
-    <j:set var="escapeEntryTitleAndDescription" value="false"/>
+    <j:set var="escapeEntryTitleAndDescription" value="true"/>
     <f:entry title="${h.escape(it.name)}" description="${it.formattedDescription}">
         <div name="parameter">
+            <input type="hidden" id="selected-tab-input" name="selectedTab"/>
             <!-- Tab links -->
             <div class="tab">
                 <j:forEach var="tab" items="${it.tabsValues}">
-                    <input type="button" disabled="true" id="${it.getTabButtonId(tab)}" class="tablinks">${tab.name}
-                    </input>
+                    <input type="button" disabled="true" id="${it.getTabButtonId(tab)}" value="${tab.name}"
+                           class="tablinks"/>
                 </j:forEach>
             </div>
 
             <j:forEach var="tab" items="${it.tabsValues}">
                 <!-- Tab content -->
-                <div name="tabsValues" id="${tab.name}" class="tabcontent">
-                    <input type="hidden" name="name" value="${tab.name}"/>
-                    <j:set var="escapeEntryTitleAndDescription"
-                           value="true"/> <!-- SECURITY-353 defense unless overridden -->
+                <div name="${tab.name}" id="${tab.name}" class="tabcontent">
                     <j:forEach var="parameterValue" items="${tab.parameters}">
                         <st:include it="${parameterValue}" page="value.jelly"/>
                     </j:forEach>
@@ -25,5 +23,5 @@
             </j:forEach>
         </div>
     </f:entry>
-
+    <st:adjunct includes="io.jenkins.plugins.TabsGroupParameterDefinition.tabs"/>
 </j:jelly>

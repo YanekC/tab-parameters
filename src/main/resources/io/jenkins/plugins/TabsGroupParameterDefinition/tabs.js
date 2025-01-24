@@ -31,5 +31,9 @@ function docReady(fn) {
 }
 
 docReady(function() {
-    document.getElementById("selected")?.click();
+    var input = document.getElementById("selected");
+    var tabKey = input.value;
+    if(tabKey != null){
+      openTab({"currentTarget": input}, tabKey);
+    }
 });
